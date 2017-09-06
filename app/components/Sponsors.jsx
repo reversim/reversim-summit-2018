@@ -20,6 +20,7 @@ import caprizaLogo from 'images/sponsors/capriza.png';
 import cloudinaryLogo from 'images/sponsors/cloudinary.png';
 import automatticLogo from 'images/sponsors/automattic.png';
 import cellebriteLogo from 'images/sponsors/cellebrite.jpg';
+import clicktaleLogo from 'images/sponsors/clicktale.png';
 
 const cx = classNames.bind(styles);
 
@@ -169,6 +170,14 @@ export default class Sponsors extends Component {
       description: <span>Cellebrite is a global company known for its breakthroughs in mobile data technology, delivering comprehensive solutions for mobile forensics & mobile lifecycle management.<br/>Our innovative platform help Law-Enforcement agencies worldwide to fight serious-crime by providing a high-end mobile forensics solution which extracts, decodes and analyses actionable data from mobile devices using a myriad of cutting-edge technologies ranging from byte-level data understanding and cryptanalysis to Big-Data Analytics and Neural-Networks based Machine Learning. Our solutions deployed to law enforcement, police and security agencies in over 100 countries.</span>,
       featuredJobInfo: <span>At Cellebrite we embrace excellence, our engineering teams strive to embody our core company values: Impact you focus on a great result rather than only the process. Communication you show & listen rather than tell. Courage you don’t afraid to learn and master new domains. Innovation be cleaver and not always smart. Craftsmanship you design it, build it and ship it. <br/>We are looking for leaders (Fullstack, backend, Team leaders) with strong java background who will join our analytics platform and help us shape the world to a safer place.</span>,
       featuredJobLink: "http://www.cellebrite.com/Careers/java-backend-team-leader-jb-487"
+    },
+    {
+      name: 'Clicktale',
+      logo: clicktaleLogo,
+      url: 'https://www.clicktale.com/',
+      description: 'Clicktale taps into the wisdom and behavior of millions of visitors so that businesses can deliver the best digital experiences to drive amazing business results. By synthesizing complex behavioral patterns based on millisecond-level actions such as hovers and scrolls, we enable businesses to interpret their customers’ digital body language and understand intent. The pioneer in Experience Analytics, Clicktale marries cognitive computing, machine learning and psychological research to automatically surface issues and answer questions that keep executives up at night.',
+      featuredJobInfo: 'We are looking for strong engineers who really love the challenges of high-scalability. We are already crunching tens of billions of signals a day and we are planning to go x5 or even x10 in the coming year. So, if tech challenges is your thing, come and join us!',
+      featuredJobLink: "https://www.clicktale.com/company/careers/D740F"
     },
   ]);
 
