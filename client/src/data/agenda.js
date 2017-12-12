@@ -4,7 +4,7 @@ export const agenda1 = [
   { time: "1000", text: "Welcome + Keynote", sessions: "3c1e5e0a-9774-7ff8-043b-c421a71e8b31" },
   { time: "1050", text: "Break", muted: true },
   { time: "1110", sessions: [
-    "11896515-320d-537b-b8ce-a414a3def110",
+		"1fe6e617-1f01-4c70-357c-d0be588d1775",
     "7ad6d40b-4e5a-8d57-81dd-800f849938ba",
     "fd37d9f1-b376-5aaf-5f74-c7c7286157a4"
   ]},
@@ -15,11 +15,12 @@ export const agenda1 = [
     "1dd1f609-06db-b640-b836-a33ed3dc4f61"
   ] },
   { time: "1240", text: "Lunch", muted: true },
+  { time: "1310", text: "Women Gathering (outside)", muted: true, href: '/women-gathering' },
   { time: "1340", text: "Ignites", shortSessions: [
     "70c5d0d3-e3e1-710d-bc8a-09d5a6eabf69",
     "6746a1e4-9fe8-dbd9-4e83-b355c5be2e17",
     "dab65d9b-29c7-1c07-e2f3-73923c0376e3",
-    "38ea24bb-0eb0-5803-1ea2-728e52fcc57c",
+		"87fceb26-f76e-c412-15e3-8eed45c31b9f",
     "18cc673c-32de-ce18-bb5d-19c17689a390",
     "1739b0ca-5b60-1e9d-4105-3f167874c336",
     "30461c08-353f-962e-c4a0-c345921a18ad"
@@ -63,7 +64,7 @@ export const agenda2 = [
   { time: "1000", text: "Welcome + Keynote", sessions: "b89383ea-ba2a-7e2d-425d-e0c2f2fe27d0" },
   { time: "1050", text: "Break", muted: true },
   { time: "1110", sessions: [
-    "21bd03f7-c711-2e1d-6a95-f6998beec2b9",
+		"11896515-320d-537b-b8ce-a414a3def110",
     "c1380280-bad1-d498-fd3f-c664995c5c99",
     "e273ba54-ca58-0cf9-940f-cceb86bd98b7"
   ]},
@@ -79,15 +80,15 @@ export const agenda2 = [
     "0717532c-78ac-f849-efad-6a2e882244e9",
     "516fc501-a1ad-0097-cbae-5f069d524c03",
     "b193b43d-8d12-775c-a01c-c0f1805e9794",
-    "87fceb26-f76e-c412-15e3-8eed45c31b9f",
+		"38ea24bb-0eb0-5803-1ea2-728e52fcc57c",
     "ba169253-ab97-86ca-74e2-beceb1bc523c",
     "48d882bc-1088-a1e3-45d5-9014072e58c6"
   ] },
   { time: "1420", text: "Break", muted: true },
   { time: "1430", sessions: [
-    "e9f4d8fb-75af-eb68-103b-2ccb24d49a7b",
+		"21bd03f7-c711-2e1d-6a95-f6998beec2b9",
     "b114c756-2011-dcd5-7c0d-714edacdb764",
-    "1fe6e617-1f01-4c70-357c-d0be588d1775"
+		"e9f4d8fb-75af-eb68-103b-2ccb24d49a7b"
   ] },
   { time: "1500", text: "Break", muted: true },
   { time: "1510", sessions: [{ text: "OSS in Israel", sessions: [

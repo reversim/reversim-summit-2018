@@ -11,6 +11,7 @@
     "babel-loader": "7.1.1",
     "babel-preset-react-app": "^3.0.2",
     "babel-runtime": "6.26.0",
+    "bootstrap": "4.0.0-alpha.6",
     "case-sensitive-paths-webpack-plugin": "2.1.1",
     "chalk": "1.1.3",
     "classnames": "^2.2.5",
@@ -34,6 +35,7 @@
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.6",
+    "pre-render": "^0.1.0-preview.2",
     "promise": "8.0.1",
     "react": "^15.6.1",
     "react-dev-utils": "^4.0.1",
@@ -41,8 +43,10 @@
     "react-ga": "^2.2.0",
     "react-google-maps": "^7.3.0",
     "react-hot-loader": "next",
+    "react-markdown": "^2.5.0",
     "react-router-dom": "^4.2.2",
     "react-scroll": "^1.5.4",
+    "react-transition-group": "^2.2.1",
     "reactstrap": "^4.8.0",
     "style-loader": "0.18.2",
     "sw-precache-webpack-plugin": "0.11.4",
@@ -55,11 +59,18 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "static:ssr": "NODE_ENV=production webpack -p --config config/webpack.config.ssr.js --progress",
+    "static:watch": "yarn static:ssr --watch",
+    "static:build": "yarn static:ssr && node build/render.js"
   },
   "proxy": {
-    "/api": { "target": "http://localhost:5001" },
-    "/auth": { "target": "http://localhost:5001" }
+    "/api": {
+      "target": "http://localhost:5001"
+    },
+    "/auth": {
+      "target": "http://localhost:5001"
+    }
   },
   "jest": {
     "collectCoverageFrom": [
@@ -101,5 +112,9 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "devDependencies": {
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.6"
   }
 }

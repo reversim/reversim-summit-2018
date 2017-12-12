@@ -1,6 +1,6 @@
 import outbrainLogo from '../images/sponsors/outbrain.png';
 import wixLogo from '../images/sponsors/wix.png';
-import datoramaLogo from '../images/sponsors/datorama.svg';
+import datoramaLogo from '../images/sponsors/datorama.png';
 import gigyaLogo from '../images/sponsors/gigya.png';
 import kenshooLogo from '../images/sponsors/kenshoo.png';
 import appsFlyerLogo from '../images/sponsors/apps_flyer.png';
@@ -16,7 +16,7 @@ import cloudinaryLogo from '../images/sponsors/cloudinary.png';
 import automatticLogo from '../images/sponsors/automattic.png';
 import cellebriteLogo from '../images/sponsors/cellebrite.jpg';
 import clicktaleLogo from '../images/sponsors/clicktale.png';
-// import googleLogo from '../images/sponsors/google.png';
+import googleLogo from '../images/sponsors/google.png';
 // import amazonLogo from '../images/sponsors/amazon.png';
 
 import React from 'react';
@@ -104,7 +104,7 @@ const sponsors = _.shuffle([
     url: 'http://www.akamai.com',
     description: 'Akamai is the global leader in Content Delivery Network (CDN) services, making the Internet business ready—fast, reliable, and secure—for its customers. We operate the most pervasive, highly distributed CDN—with more than 200,000 servers in 110 or more countries—delivering up to 30% of all Web traffic.',
     featuredJobInfo: 'We\'re currently looking for software engineers and test/automation engineers with strong Java background to join our web and cloud security teams! As a part of these teams, you\'ll be working on innovating and developing new and groundbreaking Security and BigData products in the largest scales.',
-    featuredJobLink: 'https://akamaijobs.referrals.selectminds.com/via/MichalF-39kEz/jobs/search/123169'
+    featuredJobLink: 'https://akamaijobs.referrals.selectminds.com/'
   },
   {
     name: 'Cloudinary',
@@ -175,14 +175,14 @@ const sponsors = _.shuffle([
     featuredJobInfo: 'We are looking for strong engineers who really love the challenges of high-scalability. We are already crunching tens of billions of signals a day and we are planning to go x5 or even x10 in the coming year. So, if tech challenges is your thing, come and join us!',
     featuredJobLink: "https://www.clicktale.com/company/careers/D740F"
   },
-  // {
-  //   name: 'Google',
-  //   logo: googleLogo,
-  //   url: '',
-  //   description: '',
-  //   featuredJobInfo: '',
-  //   featuredJobLink: ""
-  // },
+  {
+    name: 'Google',
+    logo: googleLogo,
+    url: 'https://careers.google.com/locations/tel-aviv-haifa/',
+    description: 'Google\'s software engineers develop the next-generation technologies that change how millions of users connect, explore, and interact with information and one another. Our ambitions reach far beyond just Search. Our products need to handle information at the scale of the web. We\'re looking for ideas from every area of computer science, including information retrieval, artificial intelligence, natural language processing, distributed computing, large-scale system design, networking, security, data compression, and user interface design; the list goes on and is growing every day. As a software engineer, you work on a small team and can switch teams and projects as our fast-paced business grows and evolves. We need our engineers to be versatile and passionate to tackle new problems as we continue to push technology forward.',
+    featuredJobInfo: '',
+    featuredJobLink: 'https://careers.google.com/jobs#!t=jo&jid=/google/full-stack-software-engineer-yigal-alon-98-tel-aviv-yafo-israel-1640920118&'
+  },
   // {
   //   name: 'Amazon',
   //   logo: amazonLogo,

@@ -2,8 +2,14 @@
     background: url('../images/hero-min.png') center;
     background-size: cover;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     color: #fff;
+}
+
+@media (max-width:991px) {
+    .hero {
+        padding-top: 100px;
+    }
 }
 
 .title {
@@ -18,4 +24,22 @@
     position: relative;
     left: 50%;
     transform: translateX(-50%);
+}
+
+@media (max-width:576px) {
+    .title {
+        font-size: 60px;
+    }
+}
+
+@media (max-width:460px) {
+    .title {
+        font-size: 48px;
+    }
+}
+
+@media (max-width:380px) {
+    .title {
+        font-size: 42px;
+    }
 }

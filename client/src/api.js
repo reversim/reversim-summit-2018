@@ -1,4 +1,7 @@
 import http from 'axios';
+import { isServer } from './utils';
+
+if (isServer) http.defaults.baseURL = 'https://summit2017.reversim.com';
 
 const headers = {
   Accept: 'application/json'
@@ -30,8 +33,17 @@ const put = (
   headers
 }).then(resp => resp.data);
 
+const delete2 = (
+  url,
+  params = {}
+) => http.delete(url, {
+  params,
+  headers
+}).then(resp => resp.data);
+
 export {
   get,
   post,
-  put
+  put,
+	delete2
 }

@@ -8,6 +8,7 @@ import { controllers } from '../db';
 
 const usersController = controllers.users;
 const proposalsController = controllers.proposals;
+const messagesController = controllers.messages;
 
 export default (app) => {
   // user routes
@@ -17,7 +18,7 @@ export default (app) => {
   app.post('/updateUser', usersController.update);
   app.get('/user/proposals', usersController.getProposals);
   app.get('/api/team', usersController.getReversimTeam);
-  app.post('/profileImage', usersController.uploadProfilePicture);
+  app.post('/api/profileImage', usersController.uploadProfilePicture);
   app.get('/api/me', usersController.me);
 
   // google auth
@@ -54,16 +55,20 @@ export default (app) => {
 
   // proposal routes
   app.get('/api/sessions', proposalsController.sessions);
-  app.get('/proposal', proposalsController.all);
-  app.get('/proposal/:id/recommendations', proposalsController.getRecommendations);
-  app.get('/proposal/tags', proposalsController.tags);
-  app.get('/proposal/:id', proposalsController.get);
-  app.post('/proposal/:id', proposalsController.add);
-  app.put('/proposal/:id', proposalsController.update);
-  app.delete('/proposal/:id', proposalsController.remove);
-  app.post('/proposal/:id/attend', proposalsController.attend);
+  app.get('/api/proposal', proposalsController.all);
+  app.get('/api/proposal/:id/recommendations', proposalsController.getRecommendations);
+  app.get('/api/proposal/tags', proposalsController.tags);
+  app.get('/api/proposal/:id', proposalsController.get);
+  app.post('/api/proposal/:id', proposalsController.add);
+  app.put('/api/proposal/:id', proposalsController.update);
+  app.delete('/api/proposal/:id', proposalsController.remove);
+  app.post('/api/proposal/:id/attend', proposalsController.attend);
   app.get('/api/speakers', proposalsController.speakers);
   app.get('/api/proposal/attendees', proposalsController.getAllAttendees);
+
+  app.get('/api/messages', messagesController.getMessages);
+  app.post('/api/message', messagesController.addMessage);
+  app.delete('/api/message/:id', messagesController.removeMessage);
 
   app.use("/dashboard", express.static(path.join(__dirname, '..', '..', 'app', 'dashboard', 'index.html')));
 };
