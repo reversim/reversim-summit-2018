@@ -6,7 +6,7 @@ import fs from 'fs';
 import { resolve } from 'path';
 import { toJS } from 'mobx';
 import App from './components/App';
-import './index.css';
+import './sass/bootstrap.scss';
 
 
 process.on('unhandledRejection', err => {
@@ -20,7 +20,7 @@ const indexHTML = fs.readFileSync(resolve(__dirname, '../build/template.html'))
 const renderFile = (path, filename, folder = '') => {
 	console.log("rendering", path);
 	let html = renderToString(createElement(App, { location: path }));
-	html = indexHTML.replace('<!--ssr-->', `${html}<script>window.__INITIAL_STATE__=${JSON.stringify(toJS(store))}</script>`);
+	html = indexHTML.replace('<!--ssr-->', html);
 	fs.writeFileSync(resolve(__dirname, '../build', folder, filename), html);
 };
 
@@ -33,10 +33,14 @@ initStore().then(() => {
 				renderFile(`/speaker/${speakerId}`, `${speakerId}.html`, 'speaker');
 			});
 		} else if (path === "/session/:id") {
-			const { sessions } = store;
-			sessions.forEach((session) => {
+			const { proposals } = store;
+      proposals.forEach((session) => {
 				const sessionId = session.id;
-				renderFile(`/session/${sessionId}`, `${sessionId}.html`, 'session');
+				if (sessionId) {
+          renderFile(`/session/${sessionId}`, `${sessionId}.html`, 'session');
+				} else {
+					console.log("skipping session", session._id);
+				}
 			});
 		} else {
 			const filename = path === '/' ? 'index.html' : `${path.slice(1)}.html`;
