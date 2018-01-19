@@ -7,6 +7,7 @@ const location = { to: "location", text: "Getting there", noScroll: true };
 const speakers = { to: "speakers", text: "Speakers", noScroll: true };
 const sponsors = { to: "sponsors", text: "Sponsors", noScroll: true };
 const schedule = { to: "schedule", text: "Schedule", noScroll: true };
+const proposals = { to: "proposals", text: "Proposals", noScroll: true };
 
 export default (isHome) => {
 	if (isServer) {
@@ -29,7 +30,8 @@ export default (isHome) => {
 		schedule,
 		location,
 		team,
-		sponsors
+		sponsors,
+		proposals
 	];
 
   if (!isHome) {
