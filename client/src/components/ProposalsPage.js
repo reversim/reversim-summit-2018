@@ -2,24 +2,31 @@ import React from 'react';
 import { colors } from '../utils';
 import Page from "./Page";
 import {Col, Container, Row} from "reactstrap";
+import {getSessionTypeStr} from "../utils";
+import Tag from './Tag';
 import Speaker from "./Speaker";
+import SpeakerShort from "./SpeakerShort";
 
-const ProposalItem = (proposal, i) => {
-    const tags = proposal.tags.toJS().map(tag => {
-        return <label># {tag}</label>;
-    });
-    const speakers = proposal.speaker_ids.toJS().map(speaker => {
+const generateSpeakers = (speakerArr, i) => {
+    return speakerArr.map(speaker => {
         return <Speaker {...speaker} color={colors[i%colors.length]} isFull={false}/>;
     });
+}
+
+const ProposalItem = (proposal, i) => {
+    const {title, type, speaker_ids, tags, abstract} = proposal;
+
+    // const speakers2 = generateSpeakers(proposal.speaker_ids.toJS(), i);
 
     return <Row key={i}>
         <Col xs="10" sm={{ size: 7, offset: 1}} className="mb-4">
-            <h4>{proposal.title}</h4>
-            <label>{proposal.type}</label><div class="tags">{tags}</div>
-            <p>{proposal.abstract}</p>
+            <h4>{title}</h4>
+            <p>{getSessionTypeStr(type)}</p>
+            <div className="d-flex text-muted mb-3">{tags.map(Tag)}</div>
+            <p>{abstract}</p>
         </Col>
-        <Col xs="2" sm="3" className="mb-4">
-            {speakers}
+        <Col xs="2" sm="3" className="mb-4 ml-4">
+            {speaker_ids.map(SpeakerShort)}
         </Col>
         </Row>
     };
