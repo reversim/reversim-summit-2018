@@ -6,17 +6,11 @@ import {getSessionTypeStr} from "../utils";
 import Tag from './Tag';
 import Speaker from "./Speaker";
 import SpeakerShort from "./SpeakerShort";
-
-const generateSpeakers = (speakerArr, i) => {
-    return speakerArr.map(speaker => {
-        return <Speaker {...speaker} color={colors[i%colors.length]} isFull={false}/>;
-    });
-}
+import heroImg from '../images/my-proposals.jpg';
+import TagsList from './TagsList';
 
 const ProposalItem = (proposal, i) => {
     const {title, type, speaker_ids, tags, abstract} = proposal;
-
-    // const speakers2 = generateSpeakers(proposal.speaker_ids.toJS(), i);
 
     return <Row key={i}>
         <Col xs="10" sm={{ size: 7, offset: 1}} className="mb-4">
@@ -31,14 +25,16 @@ const ProposalItem = (proposal, i) => {
         </Row>
     };
 
-const ProposalsPage = ({ proposals, ...props}) => (
-  <Page title="" {...props}>
+const ProposalsPage = ({ filteredProposals, tags, filterByTags, ...props}) => {
+  return <Page title="" {...props}>
+  <div className="hero-page-img" style={{backgroundImage: `url('${heroImg}')`}}/>
     <Container>
+        <TagsList tags={tags} filterByTags={filterByTags} />
       <h1 className="text-center my-5">Reversim Summit 2018 - Proposals</h1>
-      {proposals.toJS().map(ProposalItem)}
+      {filteredProposals.toJS().map(ProposalItem)}
     </Container>
 
   </Page>
-);
+};
 
 export default ProposalsPage;
