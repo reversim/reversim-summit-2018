@@ -5,7 +5,7 @@ import {Col, Container, Row} from "reactstrap";
 import {getSessionTypeStr} from "../utils";
 import Tag from './Tag';
 import Speaker from "./Speaker";
-import SpeakerShort from "./SpeakerShort";
+import SpeakerVertical from "./SpeakerVertical";
 import heroImg from '../images/my-proposals.jpg';
 import TagsList from './TagsList';
 
@@ -20,7 +20,7 @@ const ProposalItem = (proposal, i) => {
             <p>{abstract}</p>
         </Col>
         <Col xs="2" sm="3" className="mb-4 ml-4">
-            {speaker_ids.map(SpeakerShort)}
+            {speaker_ids.map(speaker => <SpeakerVertical key={speaker._id} {...speaker} />)}
         </Col>
         </Row>
     };
