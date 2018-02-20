@@ -22,7 +22,9 @@ const SpeakerPage = ({ speakers, user, match: { params: { id } }, ...props}) => 
     <Container>
       <Row>
         <Col sm={{size: 8, offset: 2}}>
-          <SpeakerShort {...speaker}/>
+          <div className="my-4">
+            <SpeakerShort {...speaker}/>
+          </div>
           { isUser && <Button color="primary" className="mb-4 text-center" disabled={props.isUploadingPhoto} style={{width: 150, position: 'relative', overflow: 'hidden'}}>
             { props.isUploadingPhoto ? "Uploading" : "Upload photo" }
             <input type='file' disabled={props.isUploadingPhoto} style={{opacity: 0,

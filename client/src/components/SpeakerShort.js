@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 const SpeakerShort = (speaker) => {
   const { name, picture, oneLiner, href } = speaker;
 
-  return <Row className={cn("align-items-center my-4", s.speakerShort)}>
+  return <Row className={cn("align-items-center", s.speakerShort)}>
     <Col sm="auto">
       <div className={s.speakerImg} style={{backgroundImage: `url('${picture}')`}}/>
     </Col>

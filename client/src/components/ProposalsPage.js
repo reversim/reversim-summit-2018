@@ -13,13 +13,13 @@ const ProposalItem = (proposal, i) => {
     const {title, type, speaker_ids, tags, abstract} = proposal;
 
     return <Row key={i}>
-        <Col xs="10" sm={{ size: 7, offset: 1}} className="mb-4">
+        <Col xs="10" sm={{ size: 7, offset: 1}} className="mb-5">
             <h4>{title}</h4>
             <p>{getSessionTypeStr(type)}</p>
             <div className="d-flex text-muted mb-3">{tags.map(Tag)}</div>
             <p>{abstract}</p>
         </Col>
-        <Col xs="2" sm="3" className="mb-4 ml-4">
+        <Col xs="2" sm="3" className="mb-5 ml-4">
             {speaker_ids.map(SpeakerShort)}
         </Col>
         </Row>
@@ -31,7 +31,7 @@ const ProposalsPage = ({ filteredProposals, tags, filterByTags, ...props}) => {
     <Container>
         <TagsList tags={tags} filterByTags={filterByTags} />
       <h1 className="text-center my-5">Reversim Summit 2018 - Proposals</h1>
-      {filteredProposals.toJS().map(ProposalItem)}
+      {filteredProposals.map(ProposalItem)}
     </Container>
 
   </Page>
