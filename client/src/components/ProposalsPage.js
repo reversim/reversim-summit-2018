@@ -11,7 +11,7 @@ const ProposalItem = (proposal, i) => {
     const {title, type, speaker_ids, tags, abstract} = proposal;
 
     return <Row key={i}>
-        <Col xs="10" sm={{ size: 7, offset: 1}} className="mb-4">
+        <Col xs="10" sm={{ size: 7, offset: 1}} className="mb-5">
             <h4>{title}</h4>
             <p>{getSessionTypeStr(type)}</p>
             <div className="d-flex text-muted mb-3">{tags.map(Tag)}</div>
