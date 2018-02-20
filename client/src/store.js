@@ -8,27 +8,31 @@ const store = observable({
   speakers: [],
   sessions: [],
 	proposals: [],
-	filteredProposals: [],
 	team: [],
 	tags: [],
-	filterByTags: tags => {
-		debugger;
-		if(!tags.length) {
-			store.filteredProposals = [...store.proposals];
-			return;
+	get filteredProposals() {
+		let filtered = [];
+		if(!store.selectedTags.length) {
+			filtered = store.proposals;
 		} else {
-			store.filteredProposals = store.proposals.filter(proposal => {
-				return proposal.tags.every(tag => {
-					return store.tags.indexOf(tag) !== -1;
-				});
+			filtered = store.proposals.filter(proposal => {
+				store.selectedTags.every(tag => proposal.tags.includes(tag));
 			});
 		}
+		return filtered;
+	},
+	get selectedTags() { 
+		return store.tags.filter(tag => tag.selected);
+	},
+	toggleTagState: (tag) => {
+		let modifiedTag = store.tags.find(tag);
+		modifiedTag.selected = !modifiedTag.selected;
 	},
   messages: [],
   showTeamMember: null,
   onTeamMemberClick: id => {
     store.showTeamMember = store.showTeamMember === id ? null : id;
-  },
+	},
   selectedDate: 0,
   setSelectedDate: i => store.selectedDate = i,
   isSmallScreen: window.innerWidth < 576,
@@ -88,10 +92,11 @@ export async function initStore(initialState) {
 
 	const proposals = await getProposals();
 	store.proposals = proposals.map(processSession);
-	store.filteredProposals = [...store.proposals];
+	// store.filteredProposals = [...store.proposals];
 
 	const tags = await getAllTags();
-	store.tags = tags;
+	store.tags = tags.map(tag => {
+		return {name: tag, selected: false}});
 
 	store.speakers = uniqBy(flatMap(processedSessions, session => session.speaker_ids), x => x._id)
 		.map(speaker => ({

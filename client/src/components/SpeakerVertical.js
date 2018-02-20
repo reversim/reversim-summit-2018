@@ -1,5 +1,4 @@
 import React from 'react';
-import {Col, Row} from "reactstrap";
 import cn from 'classnames';
 import s from './SpeakerPage.css';
 import SpeakerSocialLinks from "./SpeakerSocialLinks";

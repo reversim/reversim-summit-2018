@@ -1,10 +1,8 @@
 import React from 'react';
-import { colors } from '../utils';
 import Page from "./Page";
 import {Col, Container, Row} from "reactstrap";
 import {getSessionTypeStr} from "../utils";
 import Tag from './Tag';
-import Speaker from "./Speaker";
 import SpeakerVertical from "./SpeakerVertical";
 import heroImg from '../images/my-proposals.jpg';
 import TagsList from './TagsList';
@@ -31,7 +29,7 @@ const ProposalsPage = ({ filteredProposals, tags, filterByTags, ...props}) => {
     <Container>
         <TagsList tags={tags} filterByTags={filterByTags} />
       <h1 className="text-center my-5">Reversim Summit 2018 - Proposals</h1>
-      {filteredProposals.toJS().map(ProposalItem)}
+      {filteredProposals.map(ProposalItem)}
     </Container>
 
   </Page>
