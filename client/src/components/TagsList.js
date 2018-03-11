@@ -1,14 +1,15 @@
 import React from 'react';
+import cn from 'classnames';
+import s from './TagsList.css';
 
-const clickableTag = (name, clickHandler) => {
-    let wasClicked = false;
-    const localClickHandler = () => {
-        wasClicked = !wasClicked;
-        clickHandler(name);
+const clickableTag = (tag, clickHandler) => {
+    const toggleTagSelection = () => {
+        tag.selected = !tag.selected;
+        console.log('hello');
     };
 
-    return <div key={name} onClick={localClickHandler} className={"mr-3 " + wasClicked ? "active" : ""}>
-            #{name}
+    return <div key={tag.name} onClick={toggleTagSelection} className={cn("mr-3", { [s.active]: tag.selected })}>
+            #{tag.name}
         </div>
 };
 
