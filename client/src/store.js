@@ -1,5 +1,5 @@
 import { observable, extendObservable } from 'mobx';
-import { getSessions, getProposals, getTeam, getProposal, getMe, getMessages, addMessage, removeMessage } from './data-service';
+import { getSessions, getProposals, getTeam, getProposal, getMe, getMessages, addMessage, removeMessage, getAllTags } from './data-service';
 import uniqBy from 'lodash/uniqBy';
 import flatMap from 'lodash/flatMap';
 import { isServer } from './utils';
@@ -8,12 +8,31 @@ const store = observable({
   speakers: [],
   sessions: [],
 	proposals: [],
-  team: [],
+	team: [],
+	tags: [],
+	get filteredProposals() {
+		let filtered = [];
+		if(!store.selectedTags.length) {
+			filtered = store.proposals;
+		} else {
+			filtered = store.proposals.filter(proposal => {
+				store.selectedTags.every(tag => proposal.tags.includes(tag));
+			});
+		}
+		return filtered;
+	},
+	get selectedTags() { 
+		return store.tags.filter(tag => tag.selected);
+	},
+	toggleTagState: (tag) => {
+		let modifiedTag = store.tags.find(tag);
+		modifiedTag.selected = !modifiedTag.selected;
+	},
   messages: [],
   showTeamMember: null,
   onTeamMemberClick: id => {
     store.showTeamMember = store.showTeamMember === id ? null : id;
-  },
+	},
   selectedDate: 0,
   setSelectedDate: i => store.selectedDate = i,
   isSmallScreen: window.innerWidth < 576,
@@ -73,6 +92,11 @@ export async function initStore(initialState) {
 
 	const proposals = await getProposals();
 	store.proposals = proposals.map(processSession);
+	// store.filteredProposals = [...store.proposals];
+
+	const tags = await getAllTags();
+	store.tags = tags.map(tag => {
+		return {name: tag, selected: false}});
 
 	store.speakers = uniqBy(flatMap(processedSessions, session => session.speaker_ids), x => x._id)
 		.map(speaker => ({

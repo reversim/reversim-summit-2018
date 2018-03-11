@@ -8,6 +8,7 @@ import RegisterPage from "../components/RegisterPage";
 import LocationPage from "../components/LocationPage";
 import AdminPage from '../components/AdminPage';
 import WomenGathering from '../components/WomenGathering';
+import ProposalsPage from '../components/ProposalsPage';
 
 export default [
   { path: "/", comp: Home },
@@ -21,5 +22,6 @@ export default [
   { path: "/speaker/:id", comp: SpeakerPage },
   { path: "/session/:id", comp: SessionPage },
   { path: "/admin", comp: AdminPage },
-  { path: "/women-gathering", comp: WomenGathering }
+  { path: "/proposals", comp: ProposalsPage },
+  // { path: "/proposals/:id", comp: Proposal }
 ]

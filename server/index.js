@@ -1,15 +1,8 @@
 require("babel-register");
-const path = require('path');
-const { config } = require("dotenv");
-if (process.env.NODE_ENV !== 'production') {
-  console.log('loading development env config');
-  config({ path: path.resolve(__dirname, '..', '.env-development') });
-} else {
-  console.log('loading production env config');
-  config();
-}
+require("dotenv").config();
 
 const express = require('express');
+const path = require('path');
 const { connect } = require('./db');
 const initPassport = require('./init/passport').default;
 const initExpress = require('./init/express').default;

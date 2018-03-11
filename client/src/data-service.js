@@ -40,3 +40,6 @@ export async function removeMessage(id) {
   return await delete2(`/api/message/${id}`);
 }
 
+export async function getAllTags() {
+  return await get("/api/proposal/tags");
+}
