@@ -34,5 +34,18 @@
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root"><!--ssr--></div>
+    <script>
+      function initMap() {
+        const spot = {lat: 32.1089199, lng: 34.8028505};
+        const el = document.getElementById('map');
+        if (el) {
+          const map = new google.maps.Map(el, {zoom: 17, center: spot});
+          new google.maps.Marker({position: spot, map});
+        }
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4ZHy0mFjv2O9JL4vcjnrhVLXM0UWqX8s&callback=initMap">
+    </script>
   </body>
 </html>

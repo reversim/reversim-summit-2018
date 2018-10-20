@@ -17,12 +17,6 @@ const TagFilter = ({text, isSelected, onClick}) => (
 );
 
 class ProposalsPage extends React.Component {
-  componentDidMount() {
-    if (!this.props.gotAllProposals) {
-      this.props.getAllProposals();
-    }
-  }
-
   state = {
     tagFilters: [],
     orderByTotal: false,
@@ -43,10 +37,9 @@ class ProposalsPage extends React.Component {
 
   render() {
     const proposals = values(this.props.proposals);
-    const {allTags, isSmallScreen, users, gotAllProposals} = this.props;
+    const {allTags, isSmallScreen, users} = this.props;
 
     const {tagFilters} = this.state;
-    const showProposals = !!gotAllProposals;
     const tags = allTags
       .map(tag => ({text: tag, count: proposals.filter(p => p.tags.includes(tag)).length}))
       .sort((a, b) => (a.count > b.count ? -1 : 1));
@@ -66,38 +59,19 @@ class ProposalsPage extends React.Component {
       <Page title="Proposals" {...this.props}>
         <Container>
           <h1 className="mt-6 mb-12">Proposals</h1>
-
-          <div className="pt-4 border-top mb-3">Filter by tag:</div>
-
-          <div className="d-flex flex-wrap pb-2 mb-6 border-bottom">
-            {tagStrs.map((tagStr, i) => (
-              <TagFilter
-                key={tagStr}
-                text={tagStr}
-                isSelected={tagFilters.includes(tags[i].text)}
-                onClick={() => this.onTagClick(tags[i].text)}
-              />
-            ))}
-          </div>
-          {showProposals ? (
-            <React.Fragment>
-              <div className="mb-4">Showing {showCount} proposals</div>
-              <Row>
-                <Col>
-                  {sortedProposals.map(proposal => (
-                    <Session
-                      isSmallScreen={isSmallScreen}
-                      key={proposal._id}
-                      proposal={proposal}
-                      speakers={proposal.speaker_ids.map(speakerId => users[speakerId])}
-                    />
-                  ))}
-                </Col>
-              </Row>
-            </React.Fragment>
-          ) : (
-            <span className="font-mono font-size-xl">Nothing to show :-(</span>
-          )}
+          <div className="mb-4">Showing {showCount} proposals</div>
+          <Row>
+            <Col>
+              {sortedProposals.map(proposal => (
+                <Session
+                  isSmallScreen={isSmallScreen}
+                  key={proposal._id}
+                  proposal={proposal}
+                  speakers={proposal.speaker_ids.map(speakerId => users[speakerId])}
+                />
+              ))}
+            </Col>
+          </Row>
         </Container>
       </Page>
     );

@@ -4,7 +4,8 @@ import {renderToString} from 'react-dom/server';
 import routes from './data/routeComps';
 import fs from 'fs';
 import {resolve} from 'path';
-import App from './components/App';
+import without from 'lodash/without';
+import AppStatic from './components/AppStatic';
 import './sass/bootstrap.scss';
 
 process.on('unhandledRejection', err => {
@@ -12,38 +13,39 @@ process.on('unhandledRejection', err => {
 });
 
 const indexHTML = fs
-  .readFileSync(resolve(__dirname, '../build/template.html'))
+  .readFileSync(resolve(__dirname, '../static/template.html'))
   .toString()
   .replace('<script type="text/javascript" src="render.js"></script>', '');
 
-const renderFile = (path, filename, folder = '') => {
-  console.log('rendering', path);
-  let html = renderToString(createElement(App, {location: path}));
-  html = indexHTML.replace('<!--ssr-->', html);
-  fs.writeFileSync(resolve(__dirname, '../build', folder, filename), html);
-};
-
 getInitialData().then(store => {
+  console.log('fetched initial data');
+  store.fetchComplete = true;
+  store.shuffledSpeakers = without(
+    store.speakers,
+    '5b60af7eb5c7a00014aaff91',
+    '5b45baa6990eba0014f62e39',
+  );
   routes.forEach(({path, comp: _comp}) => {
     if (path === '/speaker/:id') {
-      const {speakers} = store;
-      speakers.forEach(speaker => {
-        const speakerId = speaker._id;
-        renderFile(`/speaker/${speakerId}`, `${speakerId}.html`, 'speaker');
+      const {users} = store;
+      Object.keys(users).forEach(userId => {
+        renderFile(`/speaker/${userId}`, `${userId}.html`, 'speaker');
       });
     } else if (path === '/session/:id') {
       const {proposals} = store;
-      proposals.forEach(session => {
-        const sessionId = session._id;
-        if (sessionId) {
-          renderFile(`/session/${sessionId}`, `${sessionId}.html`, 'session');
-        } else {
-          console.log('skipping session', session._id);
-        }
+      Object.keys(proposals).forEach(proposalId => {
+        renderFile(`/session/${proposalId}`, `${proposalId}.html`, 'session');
       });
     } else {
       const filename = path === '/' ? 'index.html' : `${path.slice(1)}.html`;
       renderFile(path, filename);
     }
   });
+
+  function renderFile(path, filename, folder = '') {
+    console.log('rendering', path);
+    let html = renderToString(createElement(AppStatic, {...store, location: path}));
+    html = indexHTML.replace('<!--ssr-->', html);
+    fs.writeFileSync(resolve(__dirname, '../static', folder, filename), html);
+  }
 });

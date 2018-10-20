@@ -2,7 +2,7 @@ import {isServer} from '../utils';
 
 const _register = {to: 'register', text: 'Register'};
 const _team = {to: 'team', text: 'Team'};
-const location = {to: 'location', text: 'Venue'};
+const _location = {to: 'location', text: 'Venue'};
 const speakers = {to: 'speakers', text: 'Speakers'};
 const sponsors = {to: 'sponsors', text: 'Sponsors'};
 const schedule = {to: 'schedule', text: 'Schedule'};
@@ -12,16 +12,14 @@ const _timeline = {to: 'timeline', text: 'Timeline'};
 const about = {to: 'about', text: 'About'};
 
 export default () => {
-  let items;
+  let items = [about, schedule, /*location,*/ speakers, sessions, sponsors];
 
   if (isServer) {
-    items = [speakers, schedule, location, sponsors].map(item => ({
+    items = items.map(item => ({
       ...item,
       external: true,
       to: `/${item.to}.html`,
     }));
-  } else {
-    items = [about, schedule, /*location,*/ speakers, sessions, sponsors];
   }
 
   return items;

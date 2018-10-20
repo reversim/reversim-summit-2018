@@ -1,10 +1,5 @@
 @import 'variables';
 
-@font-face {
-  font-family: Amstelvar;
-  src: url('./Amstelvar-Roman-VF.ttf');
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -122,10 +117,6 @@ input[type='checkbox'] {
 
 .font-pt {
   font-family: 'PT Sans', sans-serif;
-}
-
-.font-amstelvar {
-  font-family: Amstelvar, serif;
 }
 
 .font-raleway {

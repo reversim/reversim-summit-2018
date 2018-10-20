@@ -62,15 +62,15 @@ export default (app) => {
   );
 
   async function initial(req, res) {
-    // const proposals = await proposalsController.getAllProposals(true, req.user ? req.user.created_at : String(Date.now()));
-    const proposals = await proposalsController.getAcceptedProposals();
+    const proposals = await proposalsController.getAllProposals(true, req.user ? req.user.created_at : String(Date.now()));
+    const acceptedProposals = proposals.filter(p => p.status === 'accepted');
     const users = await proposalsController.getProposers(proposals);
     const allTags = proposalsController.getTags(proposals);
     const user = req.user;
     const teamUsers = await usersController.getTeam();
     const messages = await messagesController.getAllMessages();
     const sponsors = await sponsorsController.getAllSponsors(true);
-    const speakers = users.map(u => u._id);
+    const speakers = proposalsController.getProposerIds(acceptedProposals);
     const team = teamUsers.map(u => u._id);
 
     const userId = user && String(user._id);
@@ -83,6 +83,7 @@ export default (app) => {
 
     res.json({
       proposals: keyBy(mappedProposals, '_id'),
+      sessions: acceptedProposals.map(p => p._id),
       users: keyBy(mappedUsers, '_id'),
       user: user ? user._id : null,
       allTags,
@@ -104,7 +105,7 @@ export default (app) => {
   app.put('/api/proposal/:id', proposalsController.update);
   app.delete('/api/proposal/:id', proposalsController.remove);
   app.post('/api/proposal/:id/attend', proposalsController.attend);
-  app.get('/api/speakers', proposalsController.getSpeakers);
+  app.get('/api/speakers', proposalsController.speakers);
   app.get('/api/proposers', proposalsController.proposers);
   app.get('/api/proposal/attendees', proposalsController.getAllAttendees);
 

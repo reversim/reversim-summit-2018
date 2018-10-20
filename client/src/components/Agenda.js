@@ -239,25 +239,6 @@ class Agenda extends React.Component {
       <Page title="Schedule" {...this.props}>
         <Container>
           <h1 className="mb-4 font-weight-bold">Schedule</h1>
-          <Container style={{padding: 0}}>
-            <Row noGutters>
-              <Col xs="6" md="auto" className="d-md-flex border-cyan mb-6 agenda-day-filter">
-                <div className="mr-md-7 mb-6 mb-md-0">
-                  <DayFilter index={0} onChange={setExcludedDay} excludedDays={excludedDays} />
-                </div>
-                <DayFilter index={1} onChange={setExcludedDay} excludedDays={excludedDays} />
-              </Col>
-              <Col xs="6" md="auto" className="d-md-flex mb-6 agenda-hall-filter">
-                <div className="mr-md-4 mr-md-7 mb-6 mb-md-0">
-                  <HallFilter index={0} onChange={setExcludedHall} excludedHalls={excludedHalls} />
-                </div>
-                <div className="mr-md-4 mr-md-7 mb-6 mb-md-0">
-                  <HallFilter index={1} onChange={setExcludedHall} excludedHalls={excludedHalls} />
-                </div>
-                <HallFilter index={2} onChange={setExcludedHall} excludedHalls={excludedHalls} />
-              </Col>
-            </Row>
-          </Container>
           {/* <AddToCal /> */}
           {!excludedDays.includes(0) && (
             <DayAgenda index="0" sessions={proposals} users={users} excludedHalls={excludedHalls} />

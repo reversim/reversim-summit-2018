@@ -21,14 +21,9 @@ const MapWithLoader = withScriptjs(
 );
 
 const Map = () => (
-  <MapWithLoader
-    loadingElement={<div />}
-    googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&key=${
-      process.env.REACT_APP_GOOGLE_MAPS_KEY
-    }`}
-    containerElement={<div className={s.mapContainer} />}
-    mapElement={<div className={s.mapEl} />}
-  />
+  <div id="map" className={s.mapContainer}>
+    <div className={s.mapEl} />
+  </div>
 );
 
 export default Map;

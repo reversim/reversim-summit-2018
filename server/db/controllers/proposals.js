@@ -224,11 +224,15 @@ function attend(req, res) {
 /**
  * Get Speakers
  */
-async function getSpeakers(req, res) {
+async function getSpeakers() {
+  const p = await getAcceptedProposals();
+  return await getProposers(p);
+}
+
+async function speakers(req, res) {
   try {
-    const p = await getAcceptedProposals();
-    const users = await getProposers(p);
-    res.json(users.map(u => transformUser(u, req.user)));
+    const speakers = await getSpeakers();
+    res.json(speakers.map(u => transformUser(u, req.user)));
   } catch(err) {
     errorHandler(res)
   }
@@ -364,8 +368,12 @@ function getAllAttendees(req, res) {
   });
 }
 
+function getProposerIds(proposals) {
+  return _.uniq(_.flatMap(proposals, proposal => proposal.speaker_ids), '_id');
+}
+
 function getProposers(proposals) {
-  const userIds = _.uniq(_.flatMap(proposals, proposal => proposal.speaker_ids), '_id');
+  const userIds = getProposerIds(proposals);
   return User.find({ _id: { $in: userIds }});
 }
 
@@ -407,12 +415,14 @@ export default {
   attend,
   tags,
   getSpeakers,
+  speakers,
   sessions,
   proposers,
   getAllAttendees,
 
   getAllProposals,
   getAcceptedProposals,
+  getProposerIds,
   getProposers,
   getTags
 };

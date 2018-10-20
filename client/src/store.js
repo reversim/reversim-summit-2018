@@ -5,6 +5,7 @@ import {isServer} from './utils';
 
 const store = {
   proposals: {},
+  sessions: [],
   users: {},
   user: null,
   team: [],

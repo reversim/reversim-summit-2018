@@ -40,16 +40,18 @@ class SessionsPage extends React.Component {
       excludedTags,
     } = this.props;
 
-    const proposals = values(this.props.proposals).filter(proposal => {
-      const {day, hall} = getDateAndTime(proposal._id);
+    const proposals = this.props.sessions
+      .map(proposalId => this.props.proposals[proposalId])
+      .filter(proposal => {
+        const {day, hall} = getDateAndTime(proposal._id);
 
-      return (
-        !excludedDays.includes(day) &&
-        !excludedHalls.includes(hall) &&
-        !excludedSessionTypes.includes(proposal.type) &&
-        !intersection(excludedTags, proposal.tags.map(tag => tag.toLowerCase())).length
-      );
-    });
+        return (
+          !excludedDays.includes(day) &&
+          !excludedHalls.includes(hall) &&
+          !excludedSessionTypes.includes(proposal.type) &&
+          !intersection(excludedTags, proposal.tags.map(tag => tag.toLowerCase())).length
+        );
+      });
 
     return (
       <Page title="Sessions" {...this.props}>
@@ -61,7 +63,7 @@ class SessionsPage extends React.Component {
           </div>
 
           <Row>
-            <Col lg="9">
+            <Col>
               {proposals.length ? (
                 proposals.map(proposal => (
                   <Session
@@ -73,99 +75,6 @@ class SessionsPage extends React.Component {
                 ))
               ) : (
                 <span className="font-mono font-size-xl">Nothing to show :-(</span>
-              )}
-            </Col>
-            <Col lg="3">
-              <FilterHeader
-                text="Day"
-                isCollapsed={this.state.dayCollapsed}
-                onClick={() => this.setState(state => ({dayCollapsed: !state.dayCollapsed}))}
-              />
-              {!this.state.dayCollapsed && (
-                <Fragment>
-                  <div className="mb-4">
-                    <DayFilter index={0} onChange={setExcludedDay} excludedDays={excludedDays} />
-                  </div>
-                  <div className="mb-8">
-                    <DayFilter index={1} onChange={setExcludedDay} excludedDays={excludedDays} />
-                  </div>
-                </Fragment>
-              )}
-              <FilterHeader
-                text="Class"
-                isCollapsed={this.state.hallCollapsed}
-                onClick={() => this.setState(state => ({hallCollapsed: !state.hallCollapsed}))}
-              />
-              {!this.state.hallCollapsed && (
-                <Fragment>
-                  <div className="mb-4">
-                    <HallFilter
-                      index={0}
-                      onChange={setExcludedHall}
-                      excludedHalls={excludedHalls}
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <HallFilter
-                      index={1}
-                      onChange={setExcludedHall}
-                      excludedHalls={excludedHalls}
-                    />
-                  </div>
-                  <div className="mb-8">
-                    <HallFilter
-                      index={2}
-                      onChange={setExcludedHall}
-                      excludedHalls={excludedHalls}
-                    />
-                  </div>
-                </Fragment>
-              )}
-              <FilterHeader
-                text="Session type"
-                isCollapsed={this.state.sessionTypeCollapsed}
-                onClick={() =>
-                  this.setState(state => ({sessionTypeCollapsed: !state.sessionTypeCollapsed}))
-                }
-              />
-              {!this.state.sessionTypeCollapsed && (
-                <Fragment>
-                  <div className="mb-4">
-                    <SessionTypeFilter
-                      sessionType="full"
-                      onChange={setExcludedSessionTypes}
-                      excludedSessionTypes={excludedSessionTypes}
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <SessionTypeFilter
-                      sessionType="lightning"
-                      onChange={setExcludedSessionTypes}
-                      excludedSessionTypes={excludedSessionTypes}
-                    />
-                  </div>
-                  <div className="mb-8">
-                    <SessionTypeFilter
-                      sessionType="ossil"
-                      onChange={setExcludedSessionTypes}
-                      excludedSessionTypes={excludedSessionTypes}
-                    />
-                  </div>
-                </Fragment>
-              )}
-              <FilterHeader
-                text="Tags"
-                isCollapsed={this.state.tagCollapsed}
-                onClick={() => this.setState(state => ({tagCollapsed: !state.tagCollapsed}))}
-              />
-              {!this.state.tagCollapsed && (
-                <Fragment>
-                  {Object.keys(TAG_COLORS).map(tag => (
-                    <div className="mb-4" key={tag}>
-                      <TagFilter tag={tag} onChange={setExcludedTags} excludedTags={excludedTags} />
-                    </div>
-                  ))}
-                </Fragment>
               )}
             </Col>
           </Row>
