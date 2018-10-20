@@ -11,16 +11,20 @@ const Hero = () => (
       <div className={cn(left, 'text-white')}>
         <div className="px-2">
           <h1 className={cn('mb-6 text-uppercase line-height-1', title)}>{REVERSIM_SUMMIT}</h1>
-          <h2 className={cn(h2, 'mb-6')}>Welcome and have fun today!</h2>
+          <h2 className={cn(h2, 'mb-6')}>
+            It was great seeing you!<br />See you in Reversim Summit 2019!
+          </h2>
         </div>
         <div className={cn(separator, 'border border-cyan mb-6 mx-auto mx-md-0')} />
         <div className="d-flex justify-content-center justify-content-md-start mb-6">
           {/* <a
-            href="https://www.eventbrite.com/e/reversim-summit-2018-tickets-48220530906"
+            href="TODO videos"
             target="_blank"
-            rel="noopener noreferrer">
-            <Button className="mr-4">Get tickets</Button>
-          </a> */}
+            rel="noopener noreferrer"> */}
+          <Button disabled className="mr-4">
+            Videos (coming soon)
+          </Button>
+          {/* </a> */}
           <Link to="/schedule">
             <Button>View Schedule</Button>
           </Link>
