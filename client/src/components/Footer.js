@@ -14,11 +14,11 @@ const Footer = ({user}) => (
           <a className="text-white" href="http://confcodeofconduct.com/">
             Code of Conduct
           </a>
-          {!user && (
+          {/* {!user && (
             <a href={getLoginUrl()} className="text-white ml-6">
               Login
             </a>
-          )}
+          )} */}
         </div>
         <div className="d-flex align-items-center">
           <IconLink href="https://twitter.com/reversim" icon="twitter" isLarge className="mr-5" />
