@@ -1,1 +1,0 @@
-curl -X POST http://local.reversim.com:3000/api/proposal -H "Content-Type: application/json" -d "@dev-proposal.json" --cookie "sessionId=fill_here"
